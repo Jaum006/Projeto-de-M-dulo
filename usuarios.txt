@@ -1,0 +1,3 @@
+PACIENTE;1234;Jaum;1234;;;;;;;;
+ADM;123456;Jaum ADM;123456
+MEDICO;12345;Jaum M�dico;12345;Cardiologista

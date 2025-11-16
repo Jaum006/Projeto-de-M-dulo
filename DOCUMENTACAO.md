@@ -1,92 +1,195 @@
 # Documentação do Projeto: Prontuário Eletrônico do Paciente (PEP)
 
-## Visão Geral
+**Visão Geral**
 
-O Prontuário Eletrônico do Paciente (PEP) é um sistema desenvolvido para gerenciar informações de pacientes, usuários e consultas médicas de forma digital e segura. O objetivo é facilitar o acesso, registro e acompanhamento do histórico clínico dos pacientes, promovendo agilidade e organização para profissionais de saúde e pacientes.
+*O Prontuário Eletrônico do Paciente (PEP) é um sistema desenvolvido para gerenciar informações de usuários, pacientes, médicos e consultas médicas de forma digital, organizada e acessível.*
+*Seu foco é oferecer simplicidade, clareza e funcionalidades pensadas para a terceira idade, como menus simplificados, letras grandes e opções diretas.*
 
----
+*O objetivo principal é facilitar o acesso a informações essenciais de saúde e melhorar a comunicação entre pacientes, médicos e administradores.*
 
-## Estrutura das Classes
+**Estrutura das Classes**
 
-### 1. Usuario
+# 1. Usuario
 
-**Descrição:**  
-Classe base que representa qualquer usuário do sistema, podendo ser paciente, médico ou administrador.
+**Descrição:**
 
-**Atributos:**  
-- `nome`: Nome do usuário.
-- `cpf`: CPF do usuário, utilizado como identificador único.
-- `senha`: Senha para autenticação.
-- `perfil`: Perfil do usuário (ex: paciente, médico, admin).
+Classe base que representa um usuário geral do sistema (Paciente, Médico ou Administrador).
 
-**Métodos:**  
-- `getCPF()`: Retorna o CPF do usuário.
-- `getSenha()`: Retorna a senha do usuário.
-- `getPerfil()`: Retorna o perfil do usuário.
+**Atributos:**
 
----
+- cpf: Identificador único do usuário;
+- nome: Nome completo do usuário;
+- senha: Senha para autenticação;
+- perfil: Tipo de usuário (PACIENTE, MEDICO, ADM);
 
-### 2. Paciente
+**Métodos:**
 
-**Descrição:**  
-Classe que representa um paciente do sistema, herdando atributos e métodos da classe `Usuario`.
+- getCpf(): Retorna o CPF;
+- getNome(): Retorna o nome;
+- getSenha(): Retorna a senha;
+- getPerfil(): Retorna o perfil do usuário;
 
-**Atributos:**  
-- `consultas`: Lista de consultas realizadas ou agendadas pelo paciente.
+# 2. Paciente
 
-**Métodos:**  
-- Construtor para inicializar o paciente com nome, CPF, senha e perfil.
+**Descrição:**
 
----
+Classe que representa um paciente cadastrado no sistema. Herda de Usuario.
 
-### 3. Consulta
+**Atributos adicionais:**
 
-**Descrição:**  
-Classe que representa uma consulta médica, contendo informações relevantes para o histórico do paciente.
+- historicoConsultas: Lista de consultas já realizadas;
+- fichaMedica: Informações médicas essenciais (alergias, comorbidades, tipo sanguíneo etc);
+- contatoEmergencia: Contato de emergência do paciente;
+- anamnese: Informações básicas coletadas pelo sistema (questionário rápido);
+- lembretes: Lembretes personalizados de consultas futuras;
 
-**Atributos:**  
-- `dataHora`: Data e hora da consulta.
-- `nomeMedico`: Nome do médico responsável.
-- `notas`: Observações ou notas sobre a consulta.
+**Funcionalidades do Paciente:**
 
-**Métodos:**  
-- Construtor para inicializar os atributos da consulta.
-- `getNomeMedico()`: Retorna o nome do médico.
-- `getNotas()`: Retorna as notas da consulta.
-- `toString()`: Retorna uma representação textual da consulta.
+- Visualizar histórico de consultas;
+- Agendar nova consulta;
+- Visualizar ficha médica;
+- Editar informações pessoais;
+- Adicionar ou visualizar contato de emergência;
+- Preencher anamnese simplificada;
+- Receber lembretes de consultas;
 
----
+# 3. Médico
 
-## Fluxo Básico de Funcionamento
+**Descrição:**
 
-1. **Cadastro de Usuários:**  
-   Usuários são cadastrados no sistema com nome, CPF, senha e perfil. Pacientes são um tipo específico de usuário.
+Classe que representa o médico que utiliza o sistema.
 
-2. **Agendamento e Registro de Consultas:**  
-   Pacientes podem ter várias consultas associadas, cada uma contendo data, médico responsável e notas.
+**Atributos adicionais:**
 
-3. **Acesso ao Prontuário:**  
-   Usuários autenticados podem acessar informações conforme seu perfil. Pacientes visualizam suas consultas, médicos podem registrar e consultar informações clínicas.
+- especialidade: Especialidade médica do profissional;
+- agenda: Lista de consultas agendadas para atendimento;
 
----
+**Funcionalidades do Médico:**
 
-## Possíveis Expansões
+- Visualizar consultas agendadas;
+- Registrar atendimento (incluindo anamnese e observações);
+- Atualizar ficha médica do paciente;
+- Adicionar observações ao histórico do paciente;
+- Gerar relatórios básicos;
 
-- Implementação de perfis para médicos e administradores.
-- Cadastro e gerenciamento de prescrições, exames e tratamentos.
-- Controle de permissões de acesso conforme o perfil do usuário.
-- Interface gráfica ou web para interação com o sistema.
+# 4. Administrador
 
----
+**Descrição:**
 
-## Considerações de Segurança
+Classe responsável por gerenciar o sistema.
 
-- Senhas devem ser armazenadas de forma segura (criptografia).
-- O acesso aos dados deve ser restrito conforme o perfil do usuário.
-- O CPF é utilizado como identificador único para evitar duplicidade de registros.
+**Funcionalidades do Administrador:**
 
----
+- Cadastrar usuários;
+- Remover usuários;
+- Buscar usuários por CPF;
+- Gerar relatórios gerais do sistema;
+- Manter banco de dados local (arquivo usuarios.txt);
+- Gerenciar logs e dados de consultas;
 
-## Conclusão
+# 5. Consulta
 
-Este projeto oferece uma base sólida para um sistema de prontuário eletrônico, permitindo o gerenciamento eficiente de pacientes e consultas. A estrutura modular facilita futuras expansões e integrações com outros sistemas de saúde.
+**Descrição:** 
+
+Classe que representa uma consulta médica registrada no sistema.
+
+**Atributos:**
+
+- id: Identificador numérico da consulta;
+- cpfPaciente: CPF do paciente envolvido;
+- cpfMedico: CPF do médico responsável;
+- dataHora: Data e hora agendada;
+- notas: Observações registradas pelo médico;
+- status: Pode ser “Agendada”, “Realizada”, “Cancelada”;
+
+**Métodos:**
+
+- toString(): Retorna todos os dados formatados;
+- Métodos de acesso para cada atributo;
+- Fluxo Básico de Funcionamento;
+
+*1. Cadastro de Usuário*
+
+O administrador ou próprio usuário preenche:
+
+- Nome;
+- CPF;
+- Senha;
+- Perfil (Paciente, Médico, Administrador);
+
+***Os dados são armazenados em arquivo único: usuarios.txt.***
+
+*2. Login*
+
+O sistema verifica:
+
+- CPF;
+- Senha;
+
+E redireciona o usuário para seu menu específico.
+
+*3. Menu do Paciente*
+
+O paciente pode:
+
+- Visualizar histórico;
+- Agendar consultas;
+- Preencher anamnese;
+- Ver ficha médica;
+- Ver lembretes;
+- Atualizar informações pessoais;
+- Ver contato de emergência;
+
+*4. Menu do Médico*
+
+O médico pode:
+
+- Visualizar agenda;
+- Registrar atendimento;
+- Preencher notas da consulta;
+- Atualizar ficha médica;
+- Gerar pequenos relatórios;
+
+*5. Menu do Administrador*
+
+O administrador pode:
+
+- Cadastrar usuários;
+- Buscar usuário por CPF;
+- Remover usuário;
+- Gerar relatórios gerais;
+- Acompanhar estatísticas do sistema;
+
+# Funcionalidades Implementadas para Terceira Idade
+
+✔ Menu simplificado com letras grandes
+Layout amigável, menus curtos e sem poluição visual.
+
+✔ Anamnese simplificada
+
+Perguntas diretas e essenciais:
+
+- Sente dores frequentemente?
+- Faz uso de medicamentos?
+- Possui doenças crônicas?
+- Possui alergias?
+- Tem dificuldade de locomoção?
+
+✔ Contato de emergência
+Cada paciente pode registrar alguém para ser acionado.
+
+✔ Ficha médica
+
+Contém informações essenciais:
+
+- Alergias;
+- Tipos sanguíneo;
+- Medicamentos;
+- Condições pré-existentes;
+
+✔ Histórico e lembretes
+O paciente recebe lembretes das consultas agendadas ao acessar o menu.
+
+# Conclusão
+
+- Este projeto oferece uma base sólida e escalável para um sistema de prontuário eletrônico com foco em usabilidade para idosos.

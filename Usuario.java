@@ -1,4 +1,4 @@
-public abstract class Usuario implements AcessoSistema {
+public abstract class Usuario {
     private String cpf;
     private String nome;
     private String senha;
@@ -20,11 +20,4 @@ public abstract class Usuario implements AcessoSistema {
     public String getSenha() {
         return senha;
     }
-
-    public void acessarDados() {
-        System.out.println("CPF: " + cpf);
-        System.out.println("Nome: " + nome);
-    }
-
-    public abstract void acessarPerfil();
 }
